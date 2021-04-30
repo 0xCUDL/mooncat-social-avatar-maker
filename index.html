@@ -1,0 +1,42 @@
+
+<div id="urlOrUpload">
+<input type="text"/>
+<br> 
+<input type="file" accetp="image/*"/>
+</div>
+<div id="buttonHolder">
+<button type="button" onclick="uploadOrNot()">Display</button>
+</div>
+<div id="result"></div>
+<p>Click the button to change the background color of the picture contained in the iframe.</p>
+
+<button onclick="myFunction()">Try it</button>
+<script>
+
+function myFunction(){
+  var myframe = document.getElementById('result');
+  myframe.style.backgroundColor = "green";
+}
+
+function uploadOrNot() {
+  if (document.querySelector("input[type=file]").files[0]){
+	let input = document.querySelector("input[type=file]");
+	if (input.files && input.files[0]) {
+	  var reader = new FileReader();
+
+	  reader.onload = function(e) {
+		display(e.target.result);
+	  }
+
+	  reader.readAsDataURL(input.files[0]);
+	}
+  } else if (document.querySelector("input[type=text]").value){
+	 display(document.querySelector("input[type=text]").value);
+  }
+}
+
+function display(res) {
+  let img = document.createElement("IMG");
+  img.src=res;
+  document.querySelector("#result").appendChild(img);
+}</script>
